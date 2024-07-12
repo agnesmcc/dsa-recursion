@@ -71,7 +71,18 @@ function revString(str) {
 /** gatherStrings: given an object, return an array of all of the string values. */
 
 function gatherStrings(obj) {
-
+  if (Object.keys(obj).length === 0) {
+    return [];
+  }
+  let arr = [];
+  for (let key in obj) {
+    if (typeof obj[key] === 'string') {
+      arr.push(obj[key]);
+    } else if (typeof obj[key] === 'object') {
+      arr = arr.concat(gatherStrings(obj[key]));
+    }
+  }
+  return arr;
 }
 
 /** binarySearch: given a sorted array of numbers, and a value,
