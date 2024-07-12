@@ -89,7 +89,26 @@ function gatherStrings(obj) {
  * return the index of that value (or -1 if val is not present). */
 
 function binarySearch(arr, val) {
-
+  if (arr.length === 0) {
+    return -1;
+  } else if (arr.length === 1) {
+    if (arr[0] === val) {
+      return 0;
+    } else {
+      return -1;
+    }
+  } else if (arr[arr.length / 2] === val) {
+    return Math.floor(arr.length / 2);
+  } else if (arr[arr.length / 2] > val) {
+    return binarySearch(arr.slice(0, arr.length / 2), val);
+  } else {
+    let result = binarySearch(arr.slice(arr.length / 2), val);
+    if (result === -1) {
+      return -1;
+    } else {
+      return result + Math.floor(arr.length / 2);
+    }
+  }
 }
 
 module.exports = {
